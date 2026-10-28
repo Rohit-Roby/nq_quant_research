@@ -1,0 +1,8 @@
+README.md
+pyproject.toml
+src/nq_quant_research.egg-info/PKG-INFO
+src/nq_quant_research.egg-info/SOURCES.txt
+src/nq_quant_research.egg-info/dependency_links.txt
+src/nq_quant_research.egg-info/requires.txt
+src/nq_quant_research.egg-info/top_level.txt
+tests/test_smoke.py

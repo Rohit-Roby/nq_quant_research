@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: nq-quant-research
+Version: 0.1.0
+Summary: NQ/MNQ quantitative research and AWS data pipeline
+Requires-Python: >=3.11
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: pyarrow
+Requires-Dist: pydantic
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: ruff; extra == "dev"
+Requires-Dist: mypy; extra == "dev"

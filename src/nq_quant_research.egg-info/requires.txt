@@ -1,0 +1,9 @@
+numpy
+pandas
+pyarrow
+pydantic
+
+[dev]
+pytest
+ruff
+mypy
