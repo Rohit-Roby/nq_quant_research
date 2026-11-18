@@ -1,0 +1,16 @@
+pipeline:
+  symbol: NQ
+  source: synthetic              # synthetic | csv
+  csv_path: null                 # used when source == csv
+  start_date: "2025-01-02"
+  end_date: "2025-12-31"
+  lake_root: data/lake           # local path or s3://bucket/prefix (Glue job)
+  warehouse_path: data/warehouse.duckdb
+  reports_dir: data/reports
+  max_quarantine_rate: 0.02      # DQ gate: fail the run above 2% quarantined rows
+
+synthetic:
+  seed: 42
+  start_price: 21000.0
+  annual_vol: 0.22
+  defect_rate: 0.002             # fraction of rows corrupted to exercise validation

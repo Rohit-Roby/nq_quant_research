@@ -4,19 +4,58 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nq-quant-research"
-version = "0.1.0"
-description = "NQ/MNQ quantitative research and AWS data pipeline"
-requires-python = ">=3.11"
+version = "1.0.0"
+description = "NQ/MNQ quantitative research platform: validated medallion data pipeline, cost-aware backtesting, options-on-futures pricing and vol fitting"
+readme = "README.md"
+requires-python = ">=3.12"
 dependencies = [
-    "numpy",
-    "pandas",
-    "pyarrow",
-    "pydantic",
+    "numpy>=1.26",
+    "pandas>=2.2",
+    "pyarrow>=15",
+    "pydantic>=2.6",
+    "pyyaml>=6",
+    "duckdb>=1.0",
+    "scipy>=1.12",
 ]
 
 [project.optional-dependencies]
+spark = ["pyspark>=3.5"]
+dashboard = ["streamlit>=1.35", "plotly>=5.20"]
+airflow = ["apache-airflow>=2.9"]
 dev = [
-    "pytest",
-    "ruff",
-    "mypy",
+    "pytest>=8",
+    "pytest-cov",
+    "ruff>=0.5",
+    "mypy>=1.10",
+    "pandas-stubs",
+    "types-PyYAML",
 ]
+
+[project.scripts]
+nqqr = "quant_research.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "."]
+markers = [
+    "spark: tests that start a local Spark session (slower)",
+]
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "N"]
+ignore = ["N803", "N806", "N812"]  # allow finance-style names like S, K, F, T
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
+warn_unused_ignores = true
+check_untyped_defs = true
+files = ["src"]

@@ -1,0 +1,13 @@
+# Round-trip cost model, applied PER SIDE PER CONTRACT.
+# These are planning assumptions, not quotes. Replace with your broker's
+# all-in schedule (commission + exchange + NFA + clearing). See docs/COSTS.md.
+costs:
+  NQ:
+    commission_per_side: 2.25     # USD, all-in estimate
+    slippage_ticks_per_side: 1.0  # 1 tick = 0.25 pt = $5.00 on NQ
+  MNQ:
+    commission_per_side: 0.62
+    slippage_ticks_per_side: 1.0  # 1 tick = $0.50 on MNQ
+
+sensitivity:
+  slippage_ticks: [0.0, 0.5, 1.0, 2.0, 3.0]
