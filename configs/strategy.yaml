@@ -1,0 +1,32 @@
+backtest:
+  instrument: MNQ
+  contracts: 1
+  initial_capital: 25000.0
+  bar_minutes: 5
+  in_sample_fraction: 0.7     # walk-forward: first 70% of sessions IS, rest OOS
+
+strategies:
+  opening_range_breakout:
+    enabled: true
+    params:
+      or_minutes: 30
+      exit_time: "15:55"
+      stop_atr_mult: 1.5
+    grid:                      # searched in-sample only
+      or_minutes: [15, 30, 60]
+      stop_atr_mult: [1.0, 1.5, 2.0]
+
+  vwap_reversion:
+    enabled: true
+    params:
+      entry_z: 2.0
+      lookback: 24
+      exit_time: "15:55"
+    grid:
+      entry_z: [1.5, 2.0, 2.5]
+      lookback: [12, 24, 48]
+
+  rth_buy_and_hold:            # benchmark: long every RTH session, flat overnight
+    enabled: true
+    params:
+      exit_time: "15:55"

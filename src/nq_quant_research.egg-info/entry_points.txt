@@ -1,0 +1,2 @@
+[console_scripts]
+nqqr = quant_research.cli:main

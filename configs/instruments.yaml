@@ -1,0 +1,22 @@
+# CME Nasdaq-100 index futures contract specifications.
+# Source: CME contract specs (NQ / MNQ). Verify against CME before live use.
+instruments:
+  NQ:
+    description: E-mini Nasdaq-100 futures
+    exchange: CME Globex
+    multiplier: 20.0        # USD per index point
+    tick_size: 0.25         # index points
+    currency: USD
+  MNQ:
+    description: Micro E-mini Nasdaq-100 futures
+    exchange: CME Globex
+    multiplier: 2.0
+    tick_size: 0.25
+    currency: USD
+
+session:
+  timezone: America/New_York
+  globex_open: "18:00"      # previous calendar day
+  globex_close: "17:00"
+  rth_open: "09:30"
+  rth_close: "16:00"

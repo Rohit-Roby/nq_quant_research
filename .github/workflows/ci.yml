@@ -1,0 +1,50 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - name: Install
+        run: pip install -e ".[dev,spark,dashboard]"
+      - name: Lint
+        run: |
+          ruff check src tests dags glue dashboard
+          ruff format --check src tests dags glue dashboard
+      - name: Type check
+        run: mypy
+      - name: Tests
+        run: pytest -q --cov=quant_research --cov-report=term-missing
+
+  airflow-dag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Airflow + project
+        run: pip install "apache-airflow>=2.10" -e ".[dev]"
+      - name: DAG integrity
+        env:
+          AIRFLOW__CORE__LOAD_EXAMPLES: "False"
+        run: |
+          airflow db migrate
+          pytest -q tests/integration/test_glue_and_apps.py::test_airflow_dag_structure

@@ -1,13 +1,27 @@
 Metadata-Version: 2.4
 Name: nq-quant-research
-Version: 0.1.0
-Summary: NQ/MNQ quantitative research and AWS data pipeline
-Requires-Python: >=3.11
-Requires-Dist: numpy
-Requires-Dist: pandas
-Requires-Dist: pyarrow
-Requires-Dist: pydantic
+Version: 1.0.0
+Summary: NQ/MNQ quantitative research platform: validated medallion data pipeline, cost-aware backtesting, options-on-futures pricing and vol fitting
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+Requires-Dist: numpy>=1.26
+Requires-Dist: pandas>=2.2
+Requires-Dist: pyarrow>=15
+Requires-Dist: pydantic>=2.6
+Requires-Dist: pyyaml>=6
+Requires-Dist: duckdb>=1.0
+Requires-Dist: scipy>=1.12
+Provides-Extra: spark
+Requires-Dist: pyspark>=3.5; extra == "spark"
+Provides-Extra: dashboard
+Requires-Dist: streamlit>=1.35; extra == "dashboard"
+Requires-Dist: plotly>=5.20; extra == "dashboard"
+Provides-Extra: airflow
+Requires-Dist: apache-airflow>=2.9; extra == "airflow"
 Provides-Extra: dev
-Requires-Dist: pytest; extra == "dev"
-Requires-Dist: ruff; extra == "dev"
-Requires-Dist: mypy; extra == "dev"
+Requires-Dist: pytest>=8; extra == "dev"
+Requires-Dist: pytest-cov; extra == "dev"
+Requires-Dist: ruff>=0.5; extra == "dev"
+Requires-Dist: mypy>=1.10; extra == "dev"
+Requires-Dist: pandas-stubs; extra == "dev"
+Requires-Dist: types-PyYAML; extra == "dev"
